@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JS - zadanie 4</title>
+    </head>
+    <body>
+        <p id="wynik"></p>
+        <script>
+            let n = parseFloat(prompt("Podaj 1 liczbe:"));
+            let max = n;
+
+            for(let i = 2; i <= 3; i++)
+            {
+                n = parseFloat(prompt("Podaj " + i + " liczbe:"));
+
+                if(n > max)
+                {
+                    max = n;
+                }
+            }
+
+            console.log(max);
+            document.getElementById("wynik").innerHTML = max;
+            
+        </script>
+    </body>
+</html>

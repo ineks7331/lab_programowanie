@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JS - zadanie 5</title>
+    </head>
+    <body>
+        <p id="wynik"></p>
+        <script>
+            function nwd(a, b) {
+                var reszta;
+                while (b) {
+                    reszta = a % b;
+                    a = b;
+                    b = reszta;
+                }
+                return a;
+            }
+
+
+            let l1 = parseInt(prompt("Podaj pierwsza liczbe:"));
+            let l2 = parseInt(prompt("Podaj druga liczbe:"));
+            let wynik = nwd(l1, l2);
+
+            console.log(wynik);
+            document.getElementById("wynik").innerHTML = wynik;
+            
+        </script>
+    </body>
+</html>
