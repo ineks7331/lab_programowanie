@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JSON</title>
+    </head>
+    <body>
+        <form name="form" method="post" onsubmit="logowanie()">
+            <label for="userInput">Nazwa użytkownika:</label>
+            <input type="text" name="user" id="userInput">
+            <br>
+            <label for="pinInput">PIN:</label>
+            <input type="password" name="pin" id="pinInput">
+            <br>
+            <input type="submit" value="Zaloguj się">
+        </form>
+        <div id="wynik"></div>
+        <script>
+
+            var dane = 
+            [
+                {
+                    "imie": "Mateusz",
+                    "nazwisko": "Bystrzycki",
+                    "saldo": "20000",
+                    "pin": "1234",
+                    "numer": "1234"
+                },
+                {
+                    "imie": "Agnieszka",
+                    "nazwisko": "Michalak",
+                    "saldo": "12300",
+                    "pin": "5672",
+                    "numer": "243567"
+                }
+            ];
+            
+            function logowanie()
+            {
+                var form = document.forms.form;
+
+                var login = form.user.value;
+                var pin = form.pin.value;
+
+                var obiekty = JSON.parse(dane);
+
+                for(var i = 0; i < obiekty.length; i++)
+                {
+                    if(obiekty[i].numer == login && obiekty[i].pin == pin)
+                    {
+                        document.getElementById("wynik").innerHTML("<p>Witaj: " + obiekty[i].imie + " " + obiekty[i].nazwisko + "</p><p>Twoje saldo: " + obiekty[i].saldo + " zł</p><div><a href=\"#\">Wyplać gotówkę</a><a href=\"#\">Wpłać gotówkę</a></div>");
+                        return;
+                    }
+                }
+
+                document.getElementById("wynik").innerHTML("<p>Niepoprawny numer lub pin</p>");
+                return;
+            }
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tabliczka mnożenia</title>
+        <style>
+            table, td
+            {
+                border-collapse: collapse;
+                border: 1px solid black;
+                text-align: center;
+            }
+
+            td
+            {
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Tabliczka mnożenia</h1>
+        <div id="tm"></div>
+
+        <script>
+
+            var i, j;
+
+            let wynik = "<table><tr><td></td>";
+
+            for(i = 1; i <= 10; i++)
+            {
+                wynik = wynik.concat("<td>" + i + "</td>");
+            }
+
+            wynik = wynik.concat("</tr>");
+
+            for(i = 1; i <= 10; i++)
+            {
+                wynik = wynik.concat("<tr><td>" + i + "</td>");
+
+                for(j = 1; j <= 10; j++)
+                {
+                    wynik = wynik.concat("<td>" + (i*j) + "</td>");
+                }
+
+                wynik = wynik.concat("</tr>");
+            }
+
+            wynik = wynik.concat("</table>");
+
+            document.getElementById("tm").innerHTML = wynik;
+
+        </script>
+    </body>
+</html>
