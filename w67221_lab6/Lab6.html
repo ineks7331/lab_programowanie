@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            class Prostokat
+            {
+                constructor(wysokosc, szerokosc, nazwa)
+                {
+                    this.wysokosc = wysokosc;
+                    this.szerokosc = szerokosc;
+                    this.nazwa = nazwa;
+                }
+            
+                obwod()
+                {
+                    var obwod = 2 * this.wysokosc + 2 * this.szerokosc;
+                    return obwod;
+            
+                }
+            
+                pole()
+                {
+                    var pole = this.wysokosc * this.wysokosc;
+                    return pole;
+                }
+            
+                porownanie(p)
+                {
+                    if(this.pole() > p.pole())
+                    {
+                        return this;
+                    }
+                    else
+                    {
+                        return p;
+                    }
+                }
+
+                zmiennazwe(nowaNazwa)
+                {
+                    this.nazwa = nowaNazwa;
+                }
+            }
+
+            class Trojkat
+            {
+                constructor(wysokosc, dlugosc, nazwa)
+                {
+                    this.wysokosc = wysokosc;
+                    this.dlugosc = dlugosc;
+                    this.nazwa = nazwa;
+                }
+
+                pole()
+                {
+                    return (this.dlugosc * this.wysokosc)/2;
+                }
+            }
+
+            class Trapez
+            {
+                constructor(wysokosc, podsatwa1, podstawa2, nazwa)
+                {
+                    this.wysokosc = wysokosc;
+                    this.podsatwa1 = podsatwa1;
+                    this.podstawa2 = podstawa2;
+                    this.nazwa = nazwa;
+                }
+
+                pole()
+                {
+                    return ((this.podsatwa1 + this.podstawa2) * this.wysokosc)/2;
+                }
+            }
+
+            function ktorewieksze(prostokat, trojkat, trapez)
+            {
+                if(prostokat.pole() > trojkat.pole())
+                {
+                    if(prostokat.pole() > trapez.pole())
+                    {
+                        alert(prostokat.nazwa + ": " + prostokat.pole());
+                    }
+                    else
+                    {
+                        alert(trapez.nazwa + ": " + trapez.pole());
+                    }
+                }
+                else
+                {
+                    if(trojkat.pole() > trapez.pole())
+                    {
+                        alert(trojkat.nazwa + ": " + trojkat.pole());
+                    }
+                    else
+                    {
+                        alert(trapez.nazwa + ": " + trapez.pole());
+                    }
+                }
+            }
+            
+            let prostokat1 = new Prostokat(2, 2, "Prostokat1");
+            let prostokat2 = new Prostokat(4, 4, "Prostakat2");
+            let prostokat3 = new Prostokat(6, 6, "Prostakat3");
+
+            let trojkat1 = new Trojkat(2, 2, "Trojkat1");
+            let trojkat2 = new Trojkat(3, 6, "Trojkat2");
+            let trojkat3 = new Trojkat(1, 10, "Trojkat3");
+
+            let trapez1 = new Trapez(5, 10, 7, "Trapez1");
+            let trapez2 = new Trapez(10, 3, 15, "Trapez2");
+            let trapez3 = new Trapez(8, 31, 2, "Trapez3");
+            
+            alert("Pole prostokąta " + prostokat1.nazwa + " to: " + prostokat1.pole());
+            alert("Obwod prostokąta " + prostokat2.nazwa + " to: " + prostokat2.obwod());
+            alert("Wieksze pole prostokat to: " + prostokat3.porownanie(prostokat1).nazwa);
+
+            ktorewieksze(prostokat1, trojkat1, trapez1);
+
+            alert("Prostokat przed zmiana: " + prostokat1.nazwa);
+            prostokat1.zmiennazwe("Mateusz Bystrzycki");
+            alert("Prostokat po zmiana: " + prostokat1.nazwa);
+
+
+        </script>
+    </body>
+</html>
+
+

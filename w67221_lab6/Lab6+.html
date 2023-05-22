@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            var tablica = [2, 1, 4, 2, 6, 8, 9, 10, 12, 20, 22];
+            var tablica2 = tablica;
+
+            var suma = tablica.reduce((a, b) => a+b,0);
+            console.log("SUMA: " + suma);
+            var parzyste = tablica.filter(i => i%2===0);
+            console.log("PARZYSTE: " + parzyste);
+            var pomnozone = tablica.map(i => i*3);
+            console.log("POMNOŻONE: " + pomnozone);
+
+            tablica.push(12345);        // Tutaj trzeba podać numer indeksu
+
+            tablica.forEach(function(n, i, tablica){
+                if(n == 12345)          // Tutaj trzeba podać numer indeksu
+                {
+                    console.log("Moj numer albumu znajduje się na pozycji: " + i);
+                    return;
+                }
+            });
+
+            console.log("ŚREDNIA: " + (suma/tablica.length));
+
+            var max = tablica[0];
+
+            tablica.forEach(function(n, i, tablica)
+            {
+                if(n > max)
+                {
+                    max = n;
+                }
+            });
+
+            console.log("MAX: " + max);
+
+            tablica2.forEach(function(n1, i1, tablica2)
+            {
+                var w = 0;
+                tablica2.forEach(function(n2, i2, tablica2)
+                {
+                    if(n2 == n1)
+                    {
+                        w++;
+                    }
+                });
+                console.log("Liczba wystapien liczby " + n1 + " = " + w);
+            });
+            
+
+
+        </script>
+    </body>
+</html>
