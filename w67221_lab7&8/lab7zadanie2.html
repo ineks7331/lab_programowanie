@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Zadanie 2</title>
+    </head>
+    <body>
+        <form class="form" onsubmit="return wyslij()" name="formularz" method="post">
+            <div class="form-group">
+                <label for="imieInput">Imię:</label><br>
+                <input type="text" name="imie" id="imieInput">
+            </div>
+            <div class="form-group">
+                <label for="nazwiskoInput">Nazwisko:</label><br>
+                <input type="text" name="nazwisko" id="nazwiskoInput">
+            </div>
+            <div class="form-group">
+                <label for="mailInput">E-Mail:</label><br>
+                <input type="mail" name="mail" id="mailInput">
+            </div>
+            <div class="form-group">
+                <label for="hasloInput">Hasło:</label><br>
+                <input type="password" name="haslo" id="hasloInput">
+            </div>
+            <div class="form-group">
+                <label for="hasloInput">Płeć:</label><br>
+                <select name="plec" id="plecInput">
+                    <option value="k">Kobieta</option>
+                    <option value="m">Mężczyzna</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="telefonInput">Telefon:</label><br>
+                <input type="tel" name="telefon" id="telefonInput">
+            </div>
+            <div class="form-group">
+                <label for="dataUrodzeniaInput">Data urodzenia:</label><br>
+                <input type="date" name="dataUrodzenia" id="dataUrodzeniaInput">
+            </div>
+            <div class="form-group"><input type="submit" value="ZAPISZ"></div>
+        </form>
+        <script>
+            function wyslij(event)
+            {
+
+                var form = document.forms.formularz;
+
+                if(form.imie.value.length <= 0 || form.nazwisko.value.length <= 0 || form.mail.value.length <= 0 || form.haslo.value.length <= 0 || form.telefon.value.length <= 0 || form.dataUrodzenia.value.length <= 0)
+                {
+                    alert("Nie wypełniono wszytskich pól formularza");
+                    return false;
+                }
+
+                if(form.haslo.value.length <= 8)
+                {
+                    alert("Hasło nie ma więcej niż 8 znaków");
+                    return false;
+                }
+
+                var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+                if(!form.mail.match(validRegex))
+                {
+                    alert("Niepoprawny adres email");
+                    return false;
+                }
+
+                alert("Wyslano");
+                return true;
+
+            }
+        </script>
+    </body>
+</html>

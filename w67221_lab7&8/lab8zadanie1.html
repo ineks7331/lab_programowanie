@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Zadanie 1,2,3</title>
+    </head>
+    <body>
+        <form class="form" name="formularz" method="post">
+            <div class="form-group">
+                <label for="imieInput">Imię:</label><br>
+                <input type="text" name="imie" id="imieInput">
+                <span id="imieValid"></span>
+            </div>
+            <div class="form-group">
+                <label for="nazwiskoInput">Nazwisko:</label><br>
+                <input type="text" name="nazwisko" id="nazwiskoInput">
+                <span id="nazwiskoValid"></span>
+            </div>
+            <div class="form-group">
+                <label for="mailInput">E-Mail:</label><br>
+                <input type="mail" name="mail" id="mailInput">
+                <span id="mailValid"></span>
+            </div>
+            <div class="form-group">
+                <label for="hasloInput">Hasło:</label><br>
+                <input type="password" name="haslo" id="hasloInput">
+                <span id="hasloValid"></span>
+            </div>
+            <div class="form-group">
+                <label for="haslo2Input">Powtórz hasło:</label><br>
+                <input type="password" name="haslo2" id="haslo2Input">
+            </div>
+            <div class="form-group">
+                <label for="hasloInput">Płeć:</label><br>
+                <select name="plec" id="plecInput">
+                    <option value="k">Kobieta</option>
+                    <option value="m">Mężczyzna</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="telefonInput">Telefon:</label><br>
+                <input type="text" name="telefon" id="telefonInput" onkeypress="telefonz(event)">
+                <span id="telefonValid"></span>
+            </div>
+            <div class="form-group">
+                <label for="dataUrodzeniaInput">Data urodzenia:</label><br>
+                <input type="date" name="dataUrodzenia" id="dataUrodzeniaInput">
+                <span id="dataUrodzeniaValid"></span>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="krajLabel">Kraj:</label>
+                <input type="text" name="kraj" id="krajLabel" onchange="krajz()">
+            </div>
+            <div class="form-group">
+                <label for="wojewodztwoLabel">Wojewódźtwo:</label>
+                <div id="wojewodztwoContent">
+                    <input type="text" name="wojewodztwo" id="wojewodztwoLabel" disabled>
+                </div>                
+            </div>
+            <div class="form-group">
+                <label for="adresLabel">Adres zamieszkania:</label>
+                <input type="text" name="adres" id="adresLabel" disabled="disabled">
+            </div>
+            <div class="form-group">
+                <input type="checkbox" name="korespondencja" id="korespondencjaCheck" checked="checked" onchange="zmien()">
+                <label for="korespondencjaCheck">Adres korespondencyjny jest taki sam jak adres zamieszkania</label>
+            </div>
+            <div class="form-group" id="korespondencja" style="display: none;">
+                <label for="adres2Label">Adres zamieszkania:</label>
+                <input type="text" name="adres2" id="adres2Label" disabled="disabled">
+            </div>
+        </form>
+        <button onclick="wyslij()">sss</button>
+        <script>
+
+            function telefonz(evt)
+            {
+                var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+
+                if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+                {
+                    alert("Numer telefonu może składać się tylko z cyfr")
+                }
+            }
+
+            function krajz()
+            {
+                var form = document.forms.formularz;
+
+                if(form.kraj.value.toLowerCase() == "polska")
+                {
+                    document.getElementById("wojewodztwoContent").innerHTML = '<select name="wojewodztwo" id="wojewodztwoLabel"><option value="podkarpacie">Podkarpacie</option></select>';
+                }
+                else
+                {
+                    document.getElementById("wojewodztwoContent").innerHTML = '<input type="text" name="wojewodztwo" id="wojewodztwoLabel" disabled>';
+                }
+            }
+
+            function zmien()
+            {
+                var form = document.forms.formularz;
+
+                if(!form.korespondencja.checked)
+                {
+                    document.getElementById("korespondencja").style.display = "block";
+                    form.adres2.disabled = "";
+                }
+                else
+                {
+                    document.getElementById("korespondencja").style.display = "none";
+                    form.adres2.disabled = "disabled";
+                }
+            }
+
+            function wyslij()
+            {
+                var form = document.forms.formularz;
+
+                var ok = 1;
+
+                if(form.imie.value.length <= 0)
+                {
+                    document.getElementById("imieValid").innerHTML = "Nie podano imienia";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("imieValid").innerHTML = "";
+                }
+
+                if(form.nazwisko.value.length <= 0)
+                {
+                    document.getElementById("nazwiskoValid").innerHTML = "Nie podano nazwiska";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("nazwiskoValid").innerHTML = "";
+                }
+
+                var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+                if(!form.mail.value.match(validRegex))
+                {
+                    document.getElementById("mailValid").innerHTML = "Adres email jest niepoprawny";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("mailValid").innerHTML = "";
+                }
+
+                if(form.haslo.value.length <= 8)
+                {
+                    document.getElementById("hasloValid").innerHTML = "Hasło jest za krótkie (min. 8 znaków)";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("hasloValid").innerHTML = "";
+                }
+
+                if(form.telefon.value.length <= 0)
+                {
+                    document.getElementById("telefonValid").innerHTML = "Nie podano numeru telefonua";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("telefonValid").innerHTML = "";
+                }
+
+                if(birth(form.dataUrodzenia.value) || form.dataUrodzenia.value.length <= 0)
+                {
+                    document.getElementById("dataUrodzeniaValid").innerHTML = "Osoba nie jest pełnoletnia lub pole jest puste";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("dataUrodzeniaValid").innerHTML = "";
+                }
+
+                if(form.haslo.value != form.haslo2.value)
+                {
+                    document.getElementById("hasloValid").innerHTML = "Hasła nie są takie same";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("hasloValid").innerHTML = "";
+                }
+
+                if(ok == 1)
+                {
+                    form.submit();
+                }
+
+            }
+
+            function birth(data)
+            {
+                let now = new Date();
+                let dzisiaj = now.getFullYear();
+                let d = data.split("-")
+                let rok = parseInt(d[0], 10);
+
+                if(dzisiaj - rok <= 18)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        </script>
+    </body>
+</html>

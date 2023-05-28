@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Zadanie 3,4,5</title>
+    </head>
+    <body>
+        <form class="form" name="formularz" method="post">
+            <div class="form-group">
+                <label for="imieInput">Imię:</label><br>
+                <input type="text" name="imie" id="imieInput">
+                <span id="imieValid"></span>
+            </div>
+            <div class="form-group">
+                <label for="nazwiskoInput">Nazwisko:</label><br>
+                <input type="text" name="nazwisko" id="nazwiskoInput">
+                <span id="nazwiskoValid"></span>
+            </div>
+            <div class="form-group">
+                <label for="mailInput">E-Mail:</label><br>
+                <input type="mail" name="mail" id="mailInput">
+                <span id="mailValid"></span>
+            </div>
+            <div class="form-group">
+                <label for="hasloInput">Hasło:</label><br>
+                <input type="password" name="haslo" id="hasloInput">
+                <span id="hasloValid"></span>
+            </div>
+            <div class="form-group">
+                <label for="haslo2Input">Powtórz hasło:</label><br>
+                <input type="password" name="haslo2" id="haslo2Input">
+            </div>
+            <div class="form-group">
+                <label for="hasloInput">Płeć:</label><br>
+                <select name="plec" id="plecInput">
+                    <option value="k">Kobieta</option>
+                    <option value="m">Mężczyzna</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="telefonInput">Telefon:</label><br>
+                <input type="tel" name="telefon" id="telefonInput">
+                <span id="telefonValid"></span>
+            </div>
+            <div class="form-group">
+                <label for="dataUrodzeniaInput">Data urodzenia:</label><br>
+                <input type="date" name="dataUrodzenia" id="dataUrodzeniaInput">
+                <span id="dataUrodzeniaValid"></span>
+            </div>
+        </form>
+        <button onclick="wyslij()">sss</button>
+        <script>
+            function wyslij()
+            {
+                var form = document.forms.formularz;
+
+                var ok = 1;
+
+                if(form.imie.value.length <= 0)
+                {
+                    document.getElementById("imieValid").innerHTML = "Nie podano imienia";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("imieValid").innerHTML = "";
+                }
+
+                if(form.nazwisko.value.length <= 0)
+                {
+                    document.getElementById("nazwiskoValid").innerHTML = "Nie podano nazwiska";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("nazwiskoValid").innerHTML = "";
+                }
+
+                var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+                if(!form.mail.value.match(validRegex))
+                {
+                    document.getElementById("mailValid").innerHTML = "Adres email jest niepoprawny";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("mailValid").innerHTML = "";
+                }
+
+                if(form.haslo.value.length <= 8)
+                {
+                    document.getElementById("hasloValid").innerHTML = "Hasło jest za krótkie (min. 8 znaków)";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("hasloValid").innerHTML = "";
+                }
+
+                if(form.telefon.value.length <= 0)
+                {
+                    document.getElementById("telefonValid").innerHTML = "Nie podano numeru telefonua";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("telefonValid").innerHTML = "";
+                }
+
+                if(birth(form.dataUrodzenia.value) || form.dataUrodzenia.value.length <= 0)
+                {
+                    document.getElementById("dataUrodzeniaValid").innerHTML = "Osoba nie jest pełnoletnia lub pole jest puste";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("dataUrodzeniaValid").innerHTML = "";
+                }
+
+                if(form.haslo.value != form.haslo2.value)
+                {
+                    document.getElementById("hasloValid").innerHTML = "Hasła nie są takie same";
+                    ok = 0;
+                }
+                else
+                {
+                    document.getElementById("hasloValid").innerHTML = "";
+                }
+
+                if(ok == 1)
+                {
+                    form.submit();
+                }
+
+            }
+
+            function birth(data)
+            {
+                let now = new Date();
+                let dzisiaj = now.getFullYear();
+                let d = data.split("-")
+                let rok = parseInt(d[0], 10);
+
+                if(dzisiaj - rok <= 18)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+        </script>
+    </body>
+</html>
